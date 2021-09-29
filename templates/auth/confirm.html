@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Confirm {% endblock %}
+
+{% block content %}
+<H1 class="text-center">{{ htmltext[0] }}</H1>
+<p class="text-center">{{ htmltext[1] }}</p>
+<p class="text-center">{{ htmltext[2] }}</p>
+{% if htmltext[3] %}
+<div class="d-flex">
+    <a class="mx-auto bg-purple text-decoration-none text-light p-3 rounded" href="{{ url_for('auth.register') }}">Registrarme ahora</a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Iniciar sesion {% endblock %}
+
+{% block content %}
+{% if error %}
+<div class="alert alert-danger" role="alert" id="alert">
+    {{ error }}
+</div>
+{% endif %}
+<div class="container-fluid m-0">
+    <div class="row">
+        <div class="col-12 col-md-3 co1">
+            <div class="logo-container mx-auto mt-5">
+                <img class="logo w-50" src="{{ url_for('static',filename='clipart3099400.png') }}" alt="Logo">
+            </div>
+            <p class="copy text-center d-none d-md-block mb-5">© 2021</p>
+        </div>
+        <br>
+        <div class="col-12 col-md-6">
+            <form class="form d-flex flex-column align-items-center justify-content-center mt-5" method="POST">
+                <h1 class="fs-4 purple text-center mb-5">Iniciar Sesión</h1>
+                <div class="input-container">
+                    <input name="email" class="inputs mb-4" type="email" id="email" placeholder="                                                         " required onkeyup='validaremail()' onfocus="labelsup(text1)">
+                    <span><i id="check2" class="check fas fa-check ms-2 mt-3"></i></span>
+                    <span><i id="error2" class="error fas fa-times ms-2 mt-3"></i></span>
+                    <label for="email" id="text1" class="labels-i l1">Email</label>
+                    <br>
+                    <input name="password" class="inputs mb-4" type="password" id="password" placeholder="                                                         " required onfocus="labelsup(text2)">                        
+                    <label for="password" id="text2" class="labels-i l2">Contrasena</label>
+                </div>
+                <a class="fpass graydark mb-3" href="#"><i>¿Olvidaste tu contraseña?</i></a>    
+                <label for="recordarme" class="graydark mb-3"><input class="bg-purple" type="checkbox"> Mantener sesión inciada</label>       
+                <button class="btn btn-submit bg-purple my-3" type="submit">Iniciar Sesión</button>             
+            </form>
+            <input type="hidden" id="text3">
+            <input type="hidden" id="text4">
+            <input type="hidden" id="text5">
+        </div>
+        <div class="col-12 col-md-3 mb-4">
+            <a class="create mx-auto mt-1 mt-md-5 mb-4 text-center w-75" href="{{ url_for('auth.register') }}" aria-readonly="true">Crear una cuenta</a>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static',filename='verify.js') }}"></script>
+{% endblock %}

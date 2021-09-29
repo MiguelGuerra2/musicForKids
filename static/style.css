@@ -1,0 +1,212 @@
+:root {
+    --gray: #919191;
+    --graylight: #f0f0f0;
+    --graydark: #6a6a6a;
+    --purple: #600395;
+    --purplelight: #beaec7;
+    --greenlight:rgb(189, 224, 189);
+}
+body {
+    height: 100%;
+}
+.row {
+    height: 100vh;
+}
+.bg-green {
+    background-color: var(--greenlight);
+}
+.bg-purplelight {
+    background-color: var(--purplelight);
+}
+.logo-container {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background-color: var(--purple);
+}
+.logo {
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 55px;
+    /* background-color: rgb(127, 185, 127); */
+}
+.curse-progress1 {
+    margin-left: 40px;
+}
+.purple-hover:hover {
+    color: var(--purple);
+}
+.home-link {
+    font-weight: 900px;
+}
+.point {
+    width: 15px;
+    height: 15px;
+}
+.co1 {
+    position: relative;
+}
+.copy {
+    position: absolute;
+    bottom: 0;
+    left: 42%;
+    color: var(--gray);
+}
+.form {
+    height: 90%;
+}
+.inputs {
+    border: 3px solid var(--graylight);
+    border-radius: 3px;
+    outline: none;
+    width: 280px;
+    padding: 12px;
+    position: relative;
+}
+.inputs:focus {
+    border: 3px solid var(--purple);
+}
+.inputs:hover {
+    border: 3px solid var(--purple);
+}
+.inputs::placeholder {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 600;
+}
+.inputs:hover::placeholder {
+    color: var(--purple);
+}
+.labels-i {
+    position: absolute;
+    width: 280px;
+    font-size: 12px;
+    left: 0px;
+    padding: 25px 150px 14px 8px;
+    z-index: 20;
+}
+.l1 {
+    top: -5px;
+}
+.l2 {
+    top: 73px;
+}
+.l3 {
+    top: 144px;
+}
+.l4 {
+    top: 214px;
+}
+.l5 {
+    top: 292px;
+}
+.check {
+    color: green;
+    position: absolute;
+    display: none;
+}
+.error {
+    color: red;
+    position: absolute;
+    display: none;
+}
+.input-container {
+    position: relative;
+}
+.fpass {
+    text-decoration: none;
+}
+.fpass:hover {
+    color: var(--purple);
+}
+.btn-submit {
+    width: 250px;
+    padding: 14px;
+    color: white;
+    transition: all 0.5s;
+}
+.btn-submit:hover {
+    color: white;
+    transform: scale(1.1);
+}
+.create {
+    display: block;
+    height: 50px;
+    border-radius: 5px;
+    border: 3px solid var(--graylight);
+    text-decoration: none;
+    color: var(--graydark);
+    line-height: 40px;
+    min-width: 150px;
+}
+.create:hover {
+    cursor: pointer;
+    color: var(--purple);
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.75);
+}
+.purple {
+    color: var(--purple);
+}
+.bg-purple {
+    background-color: var(--purple);
+}
+.bg-gray {
+    background-color: var(--gray);
+}
+.gray {
+    color: var(--gray);
+}
+.graydark {
+    color: var(--graydark);
+}
+.bad-not {
+    font-size: 9px;
+    border-radius: 50%;
+    right: 8px;
+    margin-top: 5px;
+}
+.notname {
+    border-radius: 10px;
+}
+.menu-items {
+    list-style: none;
+}
+.bg-graylight {
+    background-color: rgb(247, 247, 247);
+}
+.home-image {
+    width: 130px;
+}
+.curse-container {
+    width: 390px;
+    height: 180px;
+    border-radius: 10px;
+}
+.curse-enroller {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;   
+    border: 3px dashed var(--gray);
+    margin-top: 36px;
+}
+.plus {
+    color: var(--gray);
+    margin-top: 12px;
+}
+.curse-icon {
+    position: relative;
+    top: -50px;
+}
+.curse-info {
+    margin: 2px 0;
+}
+@media (min-width: 768px) { 
+    .body-container {
+        margin-left: 330px;
+    }   
+    .curse-container {
+        width: 320px;
+        height: 180px;
+    }
+}
