@@ -18,32 +18,38 @@
             </a>
             <p class="copy text-center d-none d-md-block mb-5">© 2021</p>
         </div>
-        <div class="container my-0 col-12 col-md-6 mt-3">
-            <form class="form d-flex flex-column align-items-center justify-content-center mt-md-5" method="POST">
-                <label class="fs-4 purple text-center mb-5">Crear una cuenta</label>
+        <div class="container my-0 col-12 col-md-6 mt-4">
+            <form class="form d-flex flex-column align-items-center justify-content-center mt-md-2" method="POST">
+                <label class="fs-4 purple text-center mb-3">Crear una cuenta</label>
                 <div class="input-container">
                     <input name="name" class="inputs mb-4" type="text" id="name" placeholder="                                                        " required onkeyup='someBug(1)' onfocus='labelsup(text1)'>                        
-                    <label for="name" id="text1" class="labels-i l1">Nombre completo</label>
+                    <label for="name" id="text1" class="labels-i l1">Nombre</label>
                     <span><i id="check1" class="check fas fa-check ms-2 mt-3"></i></span>
                     <span><i id="error1" class="error fas fa-times ms-2 mt-3"></i></span>
                     <br>
-                    <input name="email" class="inputs mb-3" type="email" id="email" placeholder="                                                        " required onkeyup='someBug(2)' onfocus='labelsup(text2)'>
-                    <label for="email" id="text2" class="labels-i l2">Correo electronico</label>
+                    <input name="lastname" class="inputs mb-4" type="text" id="lastname" placeholder="                                                        " required onkeyup='someBug(7)' onfocus='labelsup(text2)'>                        
+                    <label for="lastname" id="text2" class="labels-i l2">Apellido</label>
+                    <span><i id="check6" class="check fas fa-check ms-2 mt-3"></i></span>
+                    <span><i id="error6" class="error fas fa-times ms-2 mt-3"></i></span>
+                    <br>
+                    <input name="email" class="inputs mb-3" type="email" id="email" placeholder="                                                        " required onkeyup='someBug(2)' onfocus='labelsup(text3)'>
+                    <label for="email" id="text3" class="labels-i l3">Correo electronico</label>
                     <span><i id="check2" class="check fas fa-check ms-2 mt-3"></i></span>
                     <span><i id="error2" class="error fas fa-times ms-2 mt-3"></i></span>
                     <br>
-                    <input name="tel" class="inputs mb-3" type="text" id="tel" placeholder="                                                        " required onkeyup='someBug(3)' onfocus='labelsup(text3)'>
-                    <label for="tel" id="text3" class="labels-i l3">Telefono Movil</label>
+                    <input name="tel" class="inputs mb-3" type="text" id="tel" placeholder="                                                        " required onkeyup='someBug(3)' onfocus='labelsup(text4)'>
+                    <label for="tel" id="text4" class="labels-i l4">Telefono Movil</label>
                     <span><i id="check3" class="check fas fa-check ms-2 mt-3"></i></span>
                     <span><i id="error3" class="error fas fa-times ms-2 mt-3"></i></span>
                     <br>
-                    <input name="pass1" class="inputs mb-4" type="password" id="pass1" data-bs-toggle="popover" data-placement="bottom" data-bs-trigger="focus"  title="La contraseña debe tener:" data-bs-content='•Entre 8-16 caracteres <br> •Al menos una mayuscula <br> •Al menos una minuscula <br> •Al menos un numero' placeholder="                                                        " required onkeyup='someBug(4)' onfocus='labelsup(text4)'>                        
-                    <label for="pass1" id="text4" class="labels-i l4">Contrasena</label>
+                    <input name="pass1" class="inputs mb-4" type="password" id="pass1" data-bs-toggle="tooltip" data-bs-placement="right" title="La contrasena debe tener:" placeholder="                                                        " required onkeyup='someBug(4)' onfocus='labelsup(text5)'>                        
+                    <label for="pass1" id="text5" class="labels-i l5">Contrasena</label>
                     <span><i id="check4" class="check fas fa-check ms-2 mt-3"></i></span>
                     <span><i id="error4" class="error fas fa-times ms-2 mt-3"></i></span>
                     <br>
-                    <input name="pass2" class="inputs mb-3" type="password" id="pass2" placeholder="                                                        " required onkeyup='someBug(5)' onfocus='labelsup(text5)'>
-                    <label for="pass2" id="text5" class="labels-i l5">Repetir contrasena</label>
+                    <!-- data-bs-toggle="popover" data-placement="bottom" data-bs-trigger="focus"  title="La contraseña debe tener:" data-bs-content="•Entre 8-16 caracteres •Al menos una mayuscula •Al menos una minuscula •Al menos un numero" -->
+                    <input name="pass2" class="inputs mb-3" type="password" id="pass2" placeholder="                                                        " required onkeyup='someBug(5)' onfocus='labelsup(text6)'>
+                    <label for="pass2" id="text6" class="labels-i l6">Repetir contrasena</label>
                     <span><i id="check5" class="check fas fa-check ms-2 mt-3"></i></span>
                     <span><i id="error5" class="error fas fa-times ms-2 mt-3"></i></span>
                 </div>

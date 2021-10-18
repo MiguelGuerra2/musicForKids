@@ -4,17 +4,19 @@ var check2 = document.getElementById('check2');
 var check3 = document.getElementById('check3');
 var check4 = document.getElementById('check4');
 var check5 = document.getElementById('check5');
+var check6 = document.getElementById('check6');
 var error1 = document.getElementById('error1');
 var error2 = document.getElementById('error2');
 var error3 = document.getElementById('error3');
 var error4 = document.getElementById('error4');
 var error5 = document.getElementById('error5');
+var error6 = document.getElementById('error6');
 var text1 = document.getElementById('text1');
 var text2 = document.getElementById('text2');
 var text3 = document.getElementById('text3');
 var text4 = document.getElementById('text4');
 var text5 = document.getElementById('text5');
-
+var text6 = document.getElementById('text6');
 
 // Se validan los diferentes campos
 function validarnombre(){
@@ -33,6 +35,25 @@ function validarnombre(){
         check1.style.display='none';
         error1.style.display='inline'; 
         name.style.border='3px solid red'    
+        return false;   
+    }
+}
+function validarapellido(){
+    var lastname = document.getElementById('lastname');
+    if(!(lastname == null || lastname.length == 0 )){
+        check6.style.display='inline';
+        error6.style.display='none'; 
+        lastname.style.border='3px solid green';
+        return true;
+    }else if(lastname.value.length == 0){
+        lastname.style.border='3px solid red';
+        check6.style.display='none';
+        error6.style.display='none';
+        return false;
+    }else {
+        check6.style.display='none';
+        error6.style.display='inline'; 
+        lastname.style.border='3px solid red'    
         return false;   
     }
 }
@@ -121,6 +142,8 @@ function compararpass(){
 function someBug(n){
     if(n == 1){
         validarnombre();
+    } else if (n == 7){
+        validarapellido();
     } else if (n == 2){
         validaremail();
     } else if (n == 3){

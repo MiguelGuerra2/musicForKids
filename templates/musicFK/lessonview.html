@@ -32,7 +32,9 @@
                             {% endif %}    
                         {% endfor %}
                         
+                        {% if notifications|length != 0 %}        
                         <i class="fas fa-bell graydark"></i> <span class="badge bad-not bg-danger position-absolute py-1 px-1">{{ count.not_counter }}</span>
+                        {% endif %}
                     
                     </button>
                     <ul class="dropdown-menu">
@@ -58,50 +60,14 @@
                 </div>
             </div>
             <div class="col-12">
-                <h1 class="d-inline-block fs-2 mb-1">Bienvenido(a), {{ name }}</h1>
-                <img class="home-image d-none d-sm-inline" src="{{ url_for('static',filename='telescopy.png') }}">
-               
-                <h2 class="fs-3 mt-2 mb-3">Tus cursos</h2>
+                <h1 class="d-inline-block fs-3 mb-1">Leccion 1</h1>
             </div>
-            <div class="col-12 d-flex flex-wrap">
-                {% if not curses %} 
-                <div class="d-block">
-                    <p>Aun no estas inscrito a ningun curso. </p>
-                    <a class="mx-auto bg-purple text-decoration-none text-light p-3 rounded m-3" href="{{ url_for('MFKroutes.enroll') }}">Inscribete ahora</a>
-                </div>
-                {% endif %}
-                
-                {% if curses %}
-                {% for curse in curses %}
-                
-                <div class="curse-container bg-graylight border ms-0 me-4 mb-4">
-                    <div class="col-12 h-50 mt-3 mb-2">
-                        <img class="curse-icon h-50 rounded mx-2 mx-md-3 mt-2 bg-warning p-1" src="{{ url_for('static',filename='guitar2.png') }}" alt="curse-icon">
-                        <div class="d-inline-block h-50 w-50 ms-1">
-                            <p class="curse-info bg-green rounded-pill d-inline-block px-1 fs-6">Medio</p>
-                            <a href="#" class="curse-info d-inline-block d-block fs-5 text-decoration-none text-dark">Curso de {{ curse['curse_name'] }}</a>
-                            <a href="#" class="curse-info d-inline-block d-block fs-6 text-decoration-none text-dark"><b>Por: </b>{{ curse['teachername'] }}</a>
-                        </div>
-                    </div>
-                    <div class="w-100 mt-2">
-                        <div class="point d-none d-md-inline-block rounded-circle bg-success ms-3"></div>
-                        <p class="d-none d-md-inline-block m-0">Progreso:</p>
-                        <div class="progress w-75 mt-4 mt-md-2 curse-progress1">
-                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ curse['progress'] }}%" aria-valuenow="{{ curse['progress'] }}" aria-valuemin="0" aria-valuemax="100"><b>{{ curse['progress'] }}%</b></div>
-                        </div>
-                    </div>
-                </div>
-            
-                {% endfor %} 
-                <div class="curse-enroller bg-graylight mx-auto ms-md-0 p-0">
-                    <a class="w-100 h-100 d-block fs-1 text-decoration-none plus text-center purple-hover" href="{{ url_for('MFKroutes.enroll') }}"><b>+</b></a>
-                </div>
-                {% endif %}
-            
-                
+            <video class="col-12 col-md-8 rounded" src="https://musicfk.s3.amazonaws.com/videoprueba.mp4" controls></video>
+            <div class="col-12 col-md-8 mt-3">
+                <h3 class="text-bold fs-3">Introduccion</h3>
+                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. A voluptates fugiat voluptatibus incidunt nemo ipsum iusto dolores, laborum, laudantium iure tempore veritatis molestias accusamus voluptas odio. Odit porro consequuntur aliquam.</p>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}

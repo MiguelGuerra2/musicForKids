@@ -1,7 +1,6 @@
-from flask import (Blueprint, flash, g, redirect, render_template, request, url_for)
-from werkzeug.exceptions import abort
-from auth import login_required
-from db import get_db
+from flask import (Blueprint, g, redirect, render_template, request, url_for)
+from .auth import login_required
+from .db import get_db
 
 bp = Blueprint('MFKroutes',__name__)
 
@@ -10,14 +9,37 @@ bp = Blueprint('MFKroutes',__name__)
 def index():
     db, c = get_db()
     c.execute(
-        'select c.curse_name, u.name as teachername, cr.completed, cr.enrolled_at'
+        'select c.curse_name, u.name as teachername, cr.progress, cr.enrolled_at'
         ' from cursesregister cr INNER JOIN user u2 on cr.enrolled_user = u2.id'
         ' INNER JOIN curses c on cr.curse = c.id INNER JOIN user u on u.id = c.teacher'
         ' where cr.enrolled_user = %s order by enrolled_at desc',
         (g.user['id'],)
     )
     curses = c.fetchall()
-    return render_template('musicFK/index.html', curses=curses, name=g.user['name'])
+    c.execute(
+        'select n.notification, c.curse_name, un.not_check'
+        ' from usersnotifications un INNER JOIN notifications n on un.not_name = n.id'
+        ' INNER JOIN curses c on un.curse_from = c.id'
+        ' where un.not_user = %s order by not_date desc',
+        (g.user['id'],)
+    )
+    notifications = c.fetchall()
+    return render_template('musicFK/index.html', curses=curses, notifications=notifications, name=g.user['name'])
+
+@bp.route('/pruebalesson')
+@login_required
+def pruebita():
+    db, c = get_db()
+    c.execute(
+        'select n.notification, c.curse_name, un.not_check'
+        ' from usersnotifications un INNER JOIN notifications n on un.not_name = n.id'
+        ' INNER JOIN curses c on un.curse_from = c.id'
+        ' where un.not_user = %s order by not_date desc',
+        (g.user['id'],)
+    )
+    notifications = c.fetchall()
+    return render_template('musicFK/lessonview.html',notifications=notifications, name=g.user['name'])
+
 
 @bp.route('/enrollcurse', methods=['GET', 'POST'])
 @login_required

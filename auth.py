@@ -8,46 +8,48 @@ from flask_mail import Mail, Message
 from itsdangerous.exc import SignatureExpired
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import redirect
-from db import get_db
+from .db import get_db
 from itsdangerous import URLSafeTimedSerializer
-
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-
-
 @with_appcontext
 @bp.route('/register', methods=['GET', 'POST'])
-def register(k=0):
+def register():
     s = URLSafeTimedSerializer(current_app.config['SERIALIZER_KEY'])
     mail = Mail(current_app)
     if request.method == 'POST':
         username = request.form['name']
+        lastname = request.form['lastname']
         email = request.form['email']
         tel = request.form['tel']
         pass1 = request.form['pass1']
         pass2 = request.form['pass2']
         error = None
-        session['username'] = username
-        session['email'] = email
-        session['tel'] = tel
-        session['password'] = pass1
         db, c = get_db()
         c.execute(
             'select id from user where email = %s', (email,)
         )
         if not username:
-            error = 'Username es requerido'
+            error = 'Nombre es requerido'
+        if not lastname:
+            error = 'Apellido es requerido'
         if not pass1:
-            error = 'Password es requerido'
+            error = 'La contrasena es requerida'
         if not pass2:
-            error = 'Confirmacion de password requerida'
+            error = 'Confirmacion de contrasena requerida'
         if pass1 != pass2:
             error = 'Las contrasenas deben coincidir'
         elif c.fetchone() is not None:
-            error = 'Email ingresado ya se encuentra registrado.'.format(g.email)
+            error = 'Email ingresado ya se encuentra registrado.'.format(email)
         
         if error is None:
+            db, c = get_db()
+            c.execute(
+                        'insert into user (name, lastname, email, tel, password, user_type) values (%s,%s,%s,%s,%s,3)',
+                        (username,lastname,email,tel,generate_password_hash(pass1))
+                    )
+            db.commit()
             token = s.dumps(email, salt=current_app.config['DUMPS_KEY'])
             htmltext = ['Solicitud Exitosa','Se ha enviado le ha enviado un mensaje de confirmacion a la direccion de correo electronico ingresada.']
             msg = Message('Correo de confirmacion', recipients=[email])
@@ -85,17 +87,12 @@ def confirm_email(token):
     except SignatureExpired:
         htmltext = ['Lo sentimos, ha ocurrido un error','El link de confirmacion expiro.','Para crear su cuenta repita el proceso de registro.','registro']
         return render_template('auth/confirm.html', htmltext=htmltext)
-    username=session['username']
-    email=session['email']
-    tel=session['tel']
-    password=session['password']
     db, c = get_db()
     c.execute(
-                'insert into user (name, email, tel, password, user_type) values (%s,%s,%s,%s,3)',
-                (username,email,tel,generate_password_hash(password))
+                'update user set confirmed = true where email = %s',(emailtest,)
             )
     db.commit()
-    htmltext = ['Felicitaciones','Su cuenta ha sido activada exitosamente']
+    htmltext = [f'Felicitaciones','Su cuenta ha sido activada exitosamente','iniciar']
     return render_template('auth/confirm.html', htmltext=htmltext)
 
 
@@ -111,9 +108,11 @@ def login():
         )
         user = c.fetchone()
         if user is None:
-             error = 'Usuario y/o contrasena invalida'
+            error = 'Usuario y/o contrasena invalida'
         elif not check_password_hash(user['password'], password):
-             error = 'Usuario y/o contrasena invalida'
+            error = 'Usuario y/o contrasena invalida'
+        elif user['confirmed'] == False:
+            error = 'Aun no ha confirmado su cuenta'
         
         if error is None:
             session.clear()
@@ -121,7 +120,6 @@ def login():
             return redirect(url_for('MFKroutes.index'))
             
         return render_template('auth/login.html', error=error)    
-
     return render_template('auth/login.html')
 
 @bp.before_app_request

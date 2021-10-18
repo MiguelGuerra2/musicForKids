@@ -91,13 +91,16 @@ body {
     top: 73px;
 }
 .l3 {
-    top: 144px;
+    top: 150px;
 }
 .l4 {
-    top: 214px;
+    top: 220px;
 }
 .l5 {
-    top: 292px;
+    top: 290px;
+}
+.l6 {
+    top: 368px;
 }
 .check {
     color: green;
@@ -167,7 +170,7 @@ body {
     margin-top: 5px;
 }
 .notname {
-    border-radius: 10px;
+    border-radius: 10px !important;
 }
 .menu-items {
     list-style: none;
@@ -179,8 +182,8 @@ body {
     width: 130px;
 }
 .curse-container {
-    width: 390px;
-    height: 180px;
+    width: 400px;
+    height: 200px;
     border-radius: 10px;
 }
 .curse-enroller {

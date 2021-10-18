@@ -3,7 +3,7 @@ import mysql.connector
 import click #Sirve para ejecutar comandos en la terminal
 from flask import config, current_app, g #Mantiene la aplicacion ejecutandose y g permite almacenar variables
 from flask.cli import with_appcontext #Permite acceder a las variables de la configuracion de la aplicacion
-from schema import instructions #Carpeta creada 
+from .schema import instructions #Carpeta creada 
 
 def get_db():
     if 'db' not in g:
