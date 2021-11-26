@@ -1,107 +1,49 @@
 {% extends 'base.html' %}
 
-{% block title %} Iniciar sesion {% endblock %}
+{% block title %} Inicio {% endblock %}
 
 {% block content %}
 
-<div class="container-fluid m-0">
-    <div class="row">
-        <div class="col-12 col-md-3 co1 bg-graylight sticky-top position-fixed d-none d-md-block" style="height:100vh">
-            <div class="logo-container mx-auto mt-3">
-                <img class="logo w-50" src="{{ url_for('static',filename='clipart3099400.png') }}" alt="Logo">
-            </div>
-            <div class="container-fluid w-100 h-50 mt-4 overflow-hidden px-0">
-                <a class="w-100 mx-0 fs-6 d-block text-center my-3 text-decoration-none py-2 graydark purple-hover home-link" href="#"><b>Home</b></a>
-                <a class="w-100 mx-0 fs-6 d-block text-center my-3 text-decoration-none py-2 graydark purple-hover home-link" href="#"><b>Clases</b></a>
-                <a class="w-100 mx-0 fs-6 d-block text-center my-3 text-decoration-none py-2 graydark purple-hover home-link" href="#"><b>Ajustes</b></a>
-                <a class="w-100 mx-0 fs-6 d-block text-center my-3 text-decoration-none py-2 graydark purple-hover" href="#"><b>Perfil</b></a>
-            </div>
-        </div>
-        <div class="col-12 col-md-9 ps-4 ps-md-5 body-container">
-            <div class="col-12 d-flex">
-                <div class="btn-group ms-auto me-1 mt-4 mb-3 notname">
-                    <button type="button" class="btn bg-graylight py-2 px-3 mx-2 d-inline-block position-relative notname" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% if notifications|length == 0 %}        
-                        <i class="fas fa-bell graydark"></i>
-                        {% endif %}
-                        
-                        {% set count = namespace(not_counter=0) %}
-                        {% for notification in notifications %}
-                            {% if notification['not_check'] == 0 %}        
-                                {% set count.not_counter = count.not_counter + 1 %}
-                            {% endif %}    
-                        {% endfor %}
-                        
-                        <i class="fas fa-bell graydark"></i> <span class="badge bad-not bg-danger position-absolute py-1 px-1">{{ count.not_counter }}</span>
-                    
-                    </button>
-                    <ul class="dropdown-menu">
-                        {% for notification in notifications %}
-                        {% if notification['not_check'] == 0 %}        
-                        <li><a class="dropdown-item bg-graylight py-2 bg-warning" href="#">{{ notification['notification'] }} en curso de {{ notification['curse_name'] }}</a></li>
-                        {% endif %}
-                        {% if notification['not_check'] == 1 %}        
-                        <li><a class="dropdown-item bg-graylight py-2" href="#">{{ notification['notification'] }} en {{ notification['curse_name'] }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                    </ul>
-                </div>
-                <div class="dropdown me-4 mt-4 mb-3 p-0">    
-                    <button class="btn bg-graylight dropdown-toggle py-2 ps-3 pe-5 notname" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle me-4 graydark"></i>{{ name }}
-                    </button>
-                    <div class="dropdown-menu mt-1 p-0" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item py-2" href="#">Perfil</a>
-                      <a class="dropdown-item py-2" href="#">Configuracion</a>
-                      <a class="dropdown-item py-2" href="{{ url_for('auth.logout') }}">Cerrar Sesion</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <h1 class="d-inline-block fs-2 mb-1">Bienvenido(a), {{ name }}</h1>
-                <img class="home-image d-none d-sm-inline" src="{{ url_for('static',filename='telescopy.png') }}">
-               
-                <h2 class="fs-3 mt-2 mb-3">Tus cursos</h2>
-            </div>
-            <div class="col-12 d-flex flex-wrap">
-                {% if not curses %} 
-                <div class="d-block">
-                    <p>Aun no estas inscrito a ningun curso. </p>
-                    <a class="mx-auto bg-purple text-decoration-none text-light p-3 rounded m-3" href="{{ url_for('MFKroutes.enroll') }}">Inscribete ahora</a>
-                </div>
-                {% endif %}
-                
-                {% if curses %}
-                {% for curse in curses %}
-                
-                <div class="curse-container bg-graylight border ms-0 me-4 mb-4">
-                    <div class="col-12 h-50 mt-3 mb-2">
-                        <img class="curse-icon h-50 rounded mx-2 mx-md-3 mt-2 bg-warning p-1" src="{{ url_for('static',filename='guitar2.png') }}" alt="curse-icon">
-                        <div class="d-inline-block h-50 w-50 ms-1">
-                            <p class="curse-info bg-green rounded-pill d-inline-block px-1 fs-6">Medio</p>
-                            <a href="#" class="curse-info d-inline-block d-block fs-5 text-decoration-none text-dark">Curso de {{ curse['curse_name'] }}</a>
-                            <a href="#" class="curse-info d-inline-block d-block fs-6 text-decoration-none text-dark"><b>Por: </b>{{ curse['teachername'] }}</a>
-                        </div>
-                    </div>
-                    <div class="w-100 mt-2">
-                        <div class="point d-none d-md-inline-block rounded-circle bg-success ms-3"></div>
-                        <p class="d-none d-md-inline-block m-0">Progreso:</p>
-                        <div class="progress w-75 mt-4 mt-md-2 curse-progress1">
-                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ curse['progress'] }}%" aria-valuenow="{{ curse['progress'] }}" aria-valuemin="0" aria-valuemax="100"><b>{{ curse['progress'] }}%</b></div>
-                        </div>
-                    </div>
-                </div>
-            
-                {% endfor %} 
-                <div class="curse-enroller bg-graylight mx-auto ms-md-0 p-0">
-                    <a class="w-100 h-100 d-block fs-1 text-decoration-none plus text-center purple-hover" href="{{ url_for('MFKroutes.enroll') }}"><b>+</b></a>
-                </div>
-                {% endif %}
-            
-                
-            </div>
-        </div>
+    <div class="col-12 ml-1">
+        <h1 class="d-inline-block fs-2 mb-1">Bienvenido(a), {{ name }}</h1>
+        <img class="home-image d-none d-sm-inline" src="{{ url_for('static',filename='telescopy.png') }}">
+    
+        <h2 class="fs-3 mt-2 mb-3">Tus cursos</h2>
     </div>
-</div>
+    <div class="col-12 d-flex flex-wrap">
+        {% if not curses %} 
+        <div class="d-block">
+            <p>Aun no estas inscrito a ningun curso. </p>
+            <a class="mx-auto bg-purple text-decoration-none text-light p-3 rounded m-3" href="{{ url_for('MFKroutes.enroll') }}">Inscribete ahora</a>
+        </div>
+        {% endif %}
+        
+        {% if curses %}
+        {% for curse in curses %}
+        
+        <div class="curse-container bg-graylight border ms-0 me-4 mb-4">
+            <div class="col-12 h-50 mt-3 mb-2">
+                <img class="curse-icon h-50 rounded mx-2 mx-md-3 mt-2 bg-warning p-1" src="{{ url_for('static',filename='guitar2.png') }}" alt="curse-icon">
+                <div class="d-inline-block h-50 w-50 ms-1">
+                    <p class="curse-info bg-green rounded-pill d-inline-block px-1 fs-6">Medio</p>
+                    <a href="#" class="curse-info d-inline-block d-block fs-5 text-decoration-none text-dark">Curso de {{ curse['curse_name'] }}</a>
+                    <a href="#" class="curse-info d-inline-block d-block fs-6 text-decoration-none text-dark"><b>Por: </b>{{ curse['teachername'] }}</a>
+                </div>
+            </div>
+            <div class="w-100 mt-2">
+                <div class="point d-none d-md-inline-block rounded-circle bg-success ms-3"></div>
+                <p class="d-none d-md-inline-block m-0">Progreso:</p>
+                <div class="progress w-75 mt-4 mt-md-2 curse-progress1">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ curse['progress'] }}%" aria-valuenow="{{ curse['progress'] }}" aria-valuemin="0" aria-valuemax="100"><b>{{ curse['progress'] }}%</b></div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %} 
+        <div class="curse-enroller bg-graylight mx-auto ms-md-0 p-0">
+            <a class="w-100 h-100 d-block fs-1 text-decoration-none plus text-center purple-hover" href="{{ url_for('MFKroutes.enroll') }}"><b>+</b></a>
+        </div>
+        {% endif %}
+    </div>
 
 {% endblock %}

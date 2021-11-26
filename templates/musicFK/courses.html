@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %} Cursos {% endblock %}
+
+{% block content %}
+    <div class="col-12 ml-5">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+    <div class="col-12 d-flex flex-wrap">
+        <h4 class="mt-3">Clases</h4>
+        
+    </div>
+    <div class="col-4">
+        <div class="card"> 
+            <div class="card-body" style="height: 100px;">
+                <div class="d-flex justify-content-between">
+                    <img class="curse-icon rounded bg-warning mt-5 mr-1" src="{{ url_for('static',filename='guitar2.png') }}" alt="curse-icon" style="width: 50px; height: 50px;">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mr-2">Curso de Guitarra</h6> 
+                            <p class="curse-info bg-green rounded-pill d-inline-block px-2 fs-6"> Nivel Medio</p>
+                        </div>
+                        <div>
+                            <p>
+                                <strong>Por:</strong>
+                                <span class="ml-1">Miguel Ángel</span>
+                            </p>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-7 mt-4">
+        <div class="card d-flex flex-row justify-content-between" style="height: 200px;">
+            <div class="d-flex">
+                <img class="curse-icon rounded bg-warning mt-5" src="{{ url_for('static',filename='guitar2.png') }}" alt="curse-icon" style="width: 200px; height: 200px;">
+                <div class="d-flex flex-column align-self-center p-5 pt-5 pr-0">
+                    <div class="d-flex justify-content-between">
+                        <h4>Introducción</h4>
+                        <span class="align-self-center pl-2">Por: Gustavo Lora</span>
+                    </div>
+                    <div>
+                        <p style="text-align: justify;">
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="align-self-center p-3 fs-20">
+                <i class="fas fa-angle-right fa-lg"></i>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
