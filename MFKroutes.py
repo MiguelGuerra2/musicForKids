@@ -61,6 +61,12 @@ def enroll():
 
     return render_template('musicFK/enroll.html')
 
+#Ruta de cursos
+@bp.route('/courses')
+@login_required
+def courses():
+    return render_template('musicFK/courses.html')
+
 #Para eliminar cursos a los que esta inscrito
 @bp.route('/<int:id>/delete', methods=['POST'])
 @login_required
@@ -69,3 +75,8 @@ def delete(id):
     c.execute('delete from musicFK where id = %s and created_by = %s', (id, g.user['id']))
     db.commit()
     return redirect(url_for('musicFK.index'))
+
+#Ruta de edición de cursos
+@bp.route('/your-class')
+def your_class():
+    return render_template('musicFK/edit-course.html')

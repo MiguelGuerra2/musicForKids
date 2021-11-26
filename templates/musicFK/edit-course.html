@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>Bienvenido profesor, </h4>
+
+    <div class="d-flex" style="gap: 20px;">
+        <div>
+            <h6>Edita tu curso</h6>
+            <button class="btn btn-outline-secondary bg-purplelight" style="position: absolute; float: right;">
+                <i class="far fa-edit"></i>
+            </button>
+            <img src="{{url_for('static',filename='guitar2.png')}}" class="img-thumbnail" style="width: 200px; height: 200px;"/>
+        </div>
+        <div class="mt-4">
+            <div class="mb-3">
+                <label for="course_name" class="form-label">Nombre del Curso</label>
+                <input type="email" class="form-control" id="course_name" aria-describedby="emailHelp">
+            </div>
+            <label for="dificultad" class="form-label">Dificultad</label>
+            <select class="form-select" aria-label="Dificultad del curso" id="dificultad">
+                <option selected>Seleccione la dificultad...</option>
+                <option value="1">Baja</option>
+                <option value="2">Media</option>
+                <option value="3">Alta</option>
+              </select>
+        </div>
+        
+    </div>
+    
+
+<div class="d-inline-flex mt-5" style="gap: 12px;">
+    <h6 class="align-self-center">Videos</h6><button class="btn bg-purplelight" data-toggle="modal" data-target="#uploadVideo">Subir Video</button>
+</div>
+<div class="card mt-3">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Descripción</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Introducción al curso</td>
+            <td>Curso de guitarra</td>
+            <td><button class="btn btn-outline-secondary bg-purplelight">
+                Editar Información <i class="far fa-edit"></i>
+            </button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div class="modal fade" id="uploadVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Subir Video</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height:400px">
+            <div class="text-center mt-5 d-flex flex-column">
+                <span>
+                    <i class="fas fa-upload" style="font-size: 70px;"></i>
+                </span>
+                <button class="btn bg-purplelight mt-5">Seleccionar archivo</button>
+            </div>
+            <!-- <div class="d-flex px-3 justify-content-between" style="gap: 50px">
+                <div class="col-4">
+                    <label for="video_title" class="form-label">Title</label>
+                    <input type="email" class="form-control" id="video_title" aria-describedby="emailHelp">
+                    <label for="description" class="form-label">Descripción</label>
+                    <input type="email" class="form-control" id="description" aria-describedby="emailHelp">
+                </div>
+                <video class="rounded" src="https://musicfk.s3.amazonaws.com/videoprueba.mp4" controls ></video>
+
+            </div> -->
+           
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary bg-purplelight col-3">Subir Video</button>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
