@@ -8,6 +8,8 @@
     {{ error }}
 </div>
 {% endif %}
+
+<img src="{{ url_for('static',filename='Design.png') }}" alt="backgroundimage" class="bg-image-reg d-none d-md-block">
 <div class="container-fluid m-0">
     <div class="row">
         <div class="col-12 col-md-3 co1 mb-4">
@@ -57,7 +59,7 @@
             </form>
         </div>
         <div class="container col-12 col-md-3 mb-4">
-            <a class="create mx-auto mt-0 mt-md-5 text-center w-75" href="{{ url_for('auth.login') }}">Iniciar Sesion</a>
+            <a class="create mx-auto mt-0 mt-md-5 text-center w-75" href="{{ url_for('auth.login') }}" style="background-color: white;">Iniciar Sesion</a>
         </div>
     </div>
 </div>

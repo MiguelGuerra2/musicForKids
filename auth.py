@@ -46,8 +46,8 @@ def register():
         if error is None:
             db, c = get_db()
             c.execute(
-                        'insert into user (name, lastname, email, tel, password, user_type) values (%s,%s,%s,%s,%s,3)',
-                        (username,lastname,email,tel,generate_password_hash(pass1))
+                        'insert into user (name, email, tel, password, user_type, lastname) values (%s,%s,%s,%s,3,%s)',
+                        (username,email,tel,generate_password_hash(pass1),lastname)
                     )
             db.commit()
             token = s.dumps(email, salt=current_app.config['DUMPS_KEY'])
@@ -88,13 +88,21 @@ def confirm_email(token):
         htmltext = ['Lo sentimos, ha ocurrido un error','El link de confirmacion expiro.','Para crear su cuenta repita el proceso de registro.','registro']
         return render_template('auth/confirm.html', htmltext=htmltext)
     db, c = get_db()
+    # Validar columna de confirmacion para mostrar que ya se ha realizado esta.
     c.execute(
-                'update user set confirmed = true where email = %s',(emailtest,)
+               'select confirmed from user where email = %s',(emailtest,)
             )
-    db.commit()
-    htmltext = [f'Felicitaciones','Su cuenta ha sido activada exitosamente','iniciar']
-    return render_template('auth/confirm.html', htmltext=htmltext)
-
+    vconfirmed = c.fetchone()    
+    if vconfirmed['confirmed'] == False:
+        c.execute(
+                    'update user set confirmed = true where email = %s',(emailtest,)
+                )
+        db.commit()
+        htmltext = ['Felicitaciones','Su cuenta ha sido activada exitosamente','iniciar']
+        return render_template('auth/confirm.html', htmltext=htmltext)
+    else: 
+        htmltext = ['Estimado usuario','Su cuenta ya ha sido activada previamente','iniciar']
+        return render_template('auth/confirm.html', htmltext=htmltext)
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():

@@ -204,6 +204,29 @@ body {
 .curse-info {
     margin: 2px 0;
 }
+.bg-image-reg {
+    position: absolute;
+    right: 0px;
+    height: 100vh;
+    width: 40vw;
+    z-index: -1;
+}
+.bg-image-reg2 {
+    position: absolute;
+    left: 0px;
+    height: 60vh;
+    width: 20vw;
+    z-index: -1;
+    margin-top: 20vh;
+}
+.bg-image-reg3 {
+    position: absolute;
+    right: 0px;
+    height: 65vh;
+    width: 20vw;
+    z-index: -1;
+    margin-top: 12.5vh;
+}
 @media (min-width: 768px) { 
     .body-container {
         margin-left: 330px;
